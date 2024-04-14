@@ -1,13 +1,11 @@
 package console;
 
 import domain.*;
-import org.junit.jupiter.api.Test;
 import service.Service;
 
 import java.sql.Array;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UI {
     private Service service;
@@ -199,13 +197,6 @@ public class UI {
         }
     }
 
-    public void addStudentValid(){
-        Student student = new Student("100","First Name Last Name",200);
-        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-        System.out.println(result);
-        assertEquals(result, 1);
-    }
-
     public static class ecValidGroup {
         int lowMaring = 100;
         int highMargin = 999;
@@ -222,108 +213,8 @@ public class UI {
         String group = "A";
     }
 
-
-    @Test
-    public void addStudentInvalidGrupa(){
-        int[] groupBoundries = {100,999};
-        Integer id = 500;
-        for(int boundary: groupBoundries)
-        {
-            for(int i = -1; i <= 1; i++)
-            {
-                id += 1;
-                int value = boundary + i;
-                Student student = new Student(id.toString(),id.toString(),value);
-                int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-                if( value >= 100 && value <= 999)
-                {
-
-                    System.out.println(value + " " + result);
-                    assertEquals(1, result);
-                } else {
-                    System.out.println(value + " " + result);
-                    assertEquals(0, result);
-                }
-
-            }
-        }
-    }
-
-    @Test
-    public void addStudentInvalidId(){
-        Student student = new Student("","First Name Last Name",200);
-        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-        assertEquals(result, 1);
-    }
-
-    public void addStudentInvalidNume(){
-        Student student = new Student("101","",200);
-        service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-    }
-@Test
-    public void addTemaValid(){
-        Tema tema = new Tema("100","Descriere",9,7);
-        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(0, result);
-    }
-
-    @Test
-    public void addTemaInvalidId(){
-        Tema tema = new Tema("","Descriere",9,7);
-        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(1, result);
-
-    }
-
-
-    @Test
-    public void addTemaInvalidDescriere(){
-        Tema tema = new Tema("102","",9,7);
-        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void addTemaInvalidDeadline(){
-        Tema tema = new Tema("103","Descriere",-1,7);
-        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void addTemaInvalidStartline(){
-        Tema tema = new Tema("104","Descriere",7,-1);
-        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(1, result);
-    }
-
-
-    public void addNotaValid(){
-        Nota nota = new Nota(new Pair<>("100","100"), 9, 9,"Bine");
-        service.saveNota("100","100", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback());
-    }
-
-    public void tests(){
-//        System.out.println("Studenti:");
-//        addStudentValid();
-//        addStudentInvalidId();
-//        addStudentInvalidNume();
-//        addStudentInvalidGrupa();
-//
-//        System.out.println("Teme:");
-        addTemaValid();
-            addTemaInvalidId();
-        addTemaInvalidDescriere();
-        addTemaInvalidDeadline();
-        addTemaInvalidStartline();
-//
-//        System.out.println("Note:");
-//        addNotaValid();
-    }
-
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        tests();
         int cmd = -1;
         printMenu();
         while(cmd != 0) {
