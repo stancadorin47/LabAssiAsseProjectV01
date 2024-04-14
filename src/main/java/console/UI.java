@@ -199,7 +199,6 @@ public class UI {
         }
     }
 
-    @Test
     public void addStudentValid(){
         Student student = new Student("100","First Name Last Name",200);
         int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
