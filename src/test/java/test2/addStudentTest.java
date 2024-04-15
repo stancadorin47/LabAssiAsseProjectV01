@@ -62,57 +62,59 @@ public class addStudentTest {
 //        }
 //    }
 //
-//    @Test
-//    public void addStudentInvalidId(){
-//        Student student = new Student("","First Name Last Name",200);
-//        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-//        assertEquals(result, 1);
-//    }
-//
-//    public void addStudentInvalidNume(){
-//        Student student = new Student("101","",200);
-//        service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-//    }
-//    @Test
-//    public void addTemaValid(){
-//        Tema tema = new Tema("100","Descriere",9,7);
-//        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-//        assertEquals(0, result);
-//    }
-//
-//    @Test
-//    public void addTemaInvalidId(){
-//        Tema tema = new Tema("","Descriere",9,7);
-//        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-//        assertEquals(1, result);
-//
-//    }
-//
-//
-//    @Test
-//    public void addTemaInvalidDescriere(){
-//        Tema tema = new Tema("102","",9,7);
-//        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-//        assertEquals(1, result);
-//    }
-//
-//    @Test
-//    public void addTemaInvalidDeadline(){
-//        Tema tema = new Tema("103","Descriere",-1,7);
-//        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-//        assertEquals(1, result);
-//    }
-//
-//    @Test
-//    public void addTemaInvalidStartline(){
-//        Tema tema = new Tema("104","Descriere",7,-1);
-//        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-//        assertEquals(1, result);
-//    }
-//
-//
-//    public void addNotaValid(){
-//        Nota nota = new Nota(new Pair<>("100","100"), 9, 9,"Bine");
-//        service.saveNota("100","100", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback());
-//    }
+    @Test
+    public void addStudentInvalidId(){
+        Student student = new Student("","First Name Last Name",200);
+        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
+        assertEquals(result, 1);
+    }
+
+    @Test
+    public void addStudentInvalidNume(){
+        Student student = new Student("101","",200);
+        service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
+    }
+
+    @Test
+    public void addTemaValid(){
+        Tema tema = new Tema("100","Descriere",9,7);
+        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void addTemaInvalidId(){
+        Tema tema = new Tema("","Descriere",9,7);
+        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        assertEquals(1, result);
+
+    }
+
+
+    @Test
+    public void addTemaInvalidDescriere(){
+        Tema tema = new Tema("102","",9,7);
+        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void addTemaInvalidDeadline(){
+        Tema tema = new Tema("103","Descriere",-1,7);
+        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void addTemaInvalidStartline(){
+        Tema tema = new Tema("104","Descriere",7,-1);
+        int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void addNotaValid(){
+        Nota nota = new Nota(new Pair<>("100","100"), 9, 9,"Bine");
+        service.saveNota("100","100", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback());
+    }
 }
