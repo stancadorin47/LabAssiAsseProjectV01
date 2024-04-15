@@ -40,18 +40,52 @@ public class addStudentTest {
     }
 
     @Test
-    public void BigBangTest(){
+    public void BigBangTestValid(){
 
         Student student = new Student("888","Big Bang",300);
         when(fileRepository1.findOne("888")).thenReturn(student);
+
         Tema tema = new Tema("888","Descriere",9,7);
         when(fileRepository2.findOne("888")).thenReturn(tema);
+
         Nota nota = new Nota(new Pair<>("888","888"), 9, 9,"Bine");
         when(fileRepository3.findOne(new Pair<>("888","888"))).thenReturn(nota);
 
         assertEquals(service.saveStudent(student.getID(), student.getNume(), student.getGrupa()), 1);
         assertEquals(service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline()), 1);
         assertEquals(service.saveNota("888","888", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback()), 1);
+    }
+
+    @Test
+    public void BigBangTestInvalidStudent(){
+
+        Student student = new Student(null,"Big Bang",300);
+        when(fileRepository1.findOne("888")).thenReturn(student);
+
+        Tema tema = new Tema(null,"Descriere",9,7);
+
+        Nota nota = new Nota(new Pair<>("886","889"), 9, 9,"Bine");
+        when(fileRepository3.findOne(new Pair<>("886","889"))).thenReturn(nota);
+
+        assertEquals(service.saveStudent(student.getID(), student.getNume(), student.getGrupa()), 1);
+        assertEquals(service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline()), 1);
+        assertEquals(service.saveNota("886","889", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback()), -1);
+    }
+
+    @Test
+    public void BigBangTestInvalidTema(){
+
+        Student student = new Student("889","Big Bang",300);
+
+        Tema tema = new Tema("889","Descriere",9,7);
+        when(fileRepository2.findOne("889")).thenReturn(tema);
+
+        Nota nota = new Nota(new Pair<>("886","889"), 9, 9,"Bine");
+        when(fileRepository3.findOne(new Pair<>("886","889"))).thenReturn(nota);
+
+        assertEquals(service.saveStudent(student.getID(), student.getNume(), student.getGrupa()), 1);
+        assertEquals(service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline()), 1);
+        assertEquals(service.saveNota("886","889", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback()), -1);
     }
 
 //    @Test
