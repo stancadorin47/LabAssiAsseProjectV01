@@ -15,6 +15,9 @@ import validation.TemaValidator;
 import validation.Validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class addStudentTest {
 
@@ -22,9 +25,9 @@ public class addStudentTest {
     Validator<Tema> temaValidator = new TemaValidator();
     Validator<Nota> notaValidator = new NotaValidator();
 
-    StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
-    TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
-    NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
+    StudentXMLRepository fileRepository1 = mock(StudentXMLRepository.class);
+    TemaXMLRepository fileRepository2 = mock(TemaXMLRepository.class);
+    NotaXMLRepository fileRepository3 = mock(NotaXMLRepository.class);
 
     Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
     @Test
@@ -39,18 +42,16 @@ public class addStudentTest {
     @Test
     public void BigBangTest(){
 
-        service.deleteStudent("888");
-        service.deleteTema("888");
-        service.deleteNota(new Pair<>("888","888"));
         Student student = new Student("888","Big Bang",300);
+        when(fileRepository1.findOne("888")).thenReturn(student);
         Tema tema = new Tema("888","Descriere",9,7);
+        when(fileRepository2.findOne("888")).thenReturn(tema);
         Nota nota = new Nota(new Pair<>("888","888"), 9, 9,"Bine");
+        when(fileRepository3.findOne(new Pair<>("888","888"))).thenReturn(nota);
 
-        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
-        result += service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        result += service.saveNota("888","888", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback());
-
-        assertEquals(result, 3);
+        assertEquals(service.saveStudent(student.getID(), student.getNume(), student.getGrupa()), 1);
+        assertEquals(service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline()), 1);
+        assertEquals(service.saveNota("888","888", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback()), 1);
     }
 
 //    @Test
@@ -94,9 +95,10 @@ public class addStudentTest {
 
     @Test
     public void addTemaValid(){
+        service.deleteTema("100");
         Tema tema = new Tema("100","Descriere",9,7);
         int result = service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
-        assertEquals(0, result);
+        assertEquals(1, result);
     }
 
     @Test
