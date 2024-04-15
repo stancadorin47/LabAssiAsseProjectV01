@@ -38,6 +38,10 @@ public class addStudentTest {
 
     @Test
     public void BigBangTest(){
+
+        service.deleteStudent("888");
+        service.deleteTema("888");
+        service.deleteNota(new Pair<>("888","888"));
         Student student = new Student("888","Big Bang",300);
         Tema tema = new Tema("888","Descriere",9,7);
         Nota nota = new Nota(new Pair<>("888","888"), 9, 9,"Bine");
