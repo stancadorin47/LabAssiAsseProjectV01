@@ -36,6 +36,19 @@ public class addStudentTest {
         assertEquals(result, 1);
     }
 
+    @Test
+    public void BigBangTest(){
+        Student student = new Student("888","Big Bang",300);
+        Tema tema = new Tema("888","Descriere",9,7);
+        Nota nota = new Nota(new Pair<>("888","888"), 9, 9,"Bine");
+
+        int result = service.saveStudent(student.getID(), student.getNume(), student.getGrupa());
+        result += service.saveTema(tema.getID(), tema.getDescriere(), tema.getDeadline(),tema.getStartline());
+        result += service.saveNota("888","888", nota.getNota(), nota.getSaptamanaPredare(), nota.getFeedback());
+
+        assertEquals(result, 3);
+    }
+
 //    @Test
 //    public void addStudentInvalidGrupa(){
 //        int[] groupBoundries = {100,999};

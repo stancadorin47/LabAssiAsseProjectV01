@@ -4,4 +4,8 @@
         <Nume>First Name Last Name</Nume>
         <Grupa>200</Grupa>
     </student>
+    <student ID="888">
+        <Nume>Big Bang</Nume>
+        <Grupa>300</Grupa>
+    </student>
 </Entitati>
